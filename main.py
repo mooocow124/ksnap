@@ -4,7 +4,7 @@ import actions
 def execute(commands):
     print("Executing transaction!")
     i = 0
-    length = len(commands.keys()) # amount of commands given
+    length = len(commands) # amount of commands given
     for command in commands.keys():
         i += 1
         print(f"Executing '{command}', command {i} out of {length}")
@@ -23,7 +23,7 @@ def main(): # parse arguments and return actions and their parameters
             command = commandbits[0] # get the actual command, ie rm, or info, et cetera
             command_argument = ":".join(commandbits[:0] + commandbits[0 + 1 :]) # merge all the indices after 0 to get the argument for the command
             commands[command] = command_argument
-    if len(commands.keys()) != 0: # If any command is given
+    if len(commands) != 0: # If any command is given
         print("Full transaction:")
         for command in commands.keys(): # List commands
             print(f"Call command '{command}' with parameter '{commands[command]}'")
@@ -32,6 +32,7 @@ def main(): # parse arguments and return actions and their parameters
             goahead = "y"
         else:
             goahead = input("Proceed with transaction? [Y/N] ")
+        goahead = goahead + "z" # hack to prevent an IndexError if blank input
         if goahead.lower()[0] == "y":
             execute(commands)
         else:
