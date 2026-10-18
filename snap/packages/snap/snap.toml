@@ -1,0 +1,10 @@
+[install]
+uninstall = false
+update = "@gh/mooocow124/ksnap/snap/packages/snap:release"
+
+[dependencies]
+micropython = ">dino <future"
+snap_git_helper = ">dino <future"
+
+[shims]
+"ksnap" = "/mnt/us/snap/packages/snap/main.py"

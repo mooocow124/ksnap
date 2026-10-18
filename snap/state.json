@@ -1,0 +1,6 @@
+{
+    "package_depended_on": {
+        "snap_git_helper": ["snap"],
+        "micropython": ["snap"]
+    }
+}
