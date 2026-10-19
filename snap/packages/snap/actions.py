@@ -1,4 +1,3 @@
-SNAP_DIR = "/mnt/us/snap" # set this to whatever directory `snap` folder of git repo is in
 
 def rm(pkg):
     pass

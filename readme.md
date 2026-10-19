@@ -1,6 +1,6 @@
-# ksnap v0.0.1
+# snap v0.0.1
 
-### WIP
+### WIP - Please come back later
 
 Package manager and framework for modern jailbroken Amazon Kindles
 
@@ -11,7 +11,7 @@ You can install any .snap.zip file as a package.
 For a list of commands at this time, run `ksnap help:commands`.
 For flags, we use - as a prefix instead of --. For example, `ksnap -help`.
 
-It also has a GUI (Mesquite app or just go to the URL snapcfg.kwebonise on your Kindle browser).
+It also has a GUI (Mesquite app or just go to the URL snapcfg.kindle on your Kindle browser).
 
 Tested devices: Kindle Paperwhite 12th gen, OS version 5.20.1, jailbroken with Vera
 
