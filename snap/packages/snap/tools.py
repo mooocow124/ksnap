@@ -3,6 +3,9 @@
 import os
 import random
 
+def get_snap_dir() -> str: # Get the directory of the snap fs
+    return os.path.dirname(os.path.realpath(__file__))
+
 def command_with_output(command) -> list: # Run a command and return its output as a string using UNIX FIFO
     myfifo = "/tmp/snap_fifo_" + str(random.randint(0, 1000000)) # Create a random FIFO name to avoid collisions
     os.system("mkfifo " + myfifo) # Create the FIFO
@@ -13,12 +16,24 @@ def command_with_output(command) -> list: # Run a command and return its output 
     os.system("rm " + myfifo) # Remove the FIFO
     return output
 
-def command_with_output_singleline(command) -> str:
+def command_with_output_bearable(command) -> list: # The original is NOT bearable to use
     output = command_with_output(command)
-    for line in output:
+    for (i, line) in enumerate(output):
         if line.rstrip("\n"):
-            return line.rstrip("\n")
-    return ""
+            output[i] = line.rstrip("\n")
+        else:
+            output[i] = None
+    for line in output:
+        if line is None:
+            output.remove(line)
+    return output
+
+def command_with_output_singleline(command) -> str: # Pretty obvious innit
+    output = command_with_output_bearable(command)
+    try:
+        return output[0]
+    except IndexError:
+        return ""
 
 def rm_rf(path): # Helper function to recursively remove a directory and its contents, or a file
     mode = os.stat(path)[0]
@@ -30,13 +45,3 @@ def rm_rf(path): # Helper function to recursively remove a directory and its con
         os.rmdir(path)
     else:
         os.remove(path)
-
-### WIP FUNCTION ###
-def direct_install(url: str): # Install a package directly from a URL
-    if url.startswith("gh://"): # GitHub shorthand
-        url_repo_path = url[5:] # get the part after gh://
-        url_bits = url_repo_path.split("/") # split the repo path into its components
-        if len(url_bits) < 2: # If the repo path is invalid
-            raise ValueError("Invalid GitHub repo path. Must be in the format 'gh://username/repo'")
-        url = f"https://github.com/{url_bits[0]}/{url_bits[1]}/archive/main.zip"
-    return url
