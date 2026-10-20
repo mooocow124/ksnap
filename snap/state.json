@@ -1,6 +1,17 @@
 {
+    "kual_providers": {},
+    "package_required": [
+        "snap"
+    ],
+    "shim_providers": {
+        "ksnap": [
+            "snap"
+        ]
+    },
+    "service_providers": {},
     "package_depended_on": {
-        "snap_git_helper": ["snap"],
-        "micropython": ["snap"]
+        "micropython": [
+            "snap"
+        ]
     }
 }

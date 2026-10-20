@@ -1,6 +1,5 @@
 # snap v0.0.1
-
-### WIP - Please come back later
+# This project is a WIP, come back later!
 
 Package manager and framework for modern jailbroken Amazon Kindles
 
@@ -18,5 +17,8 @@ Tested devices: Kindle Paperwhite 12th gen, OS version 5.20.1, jailbroken with V
 We'd love it if you contribute!
 [https://github.com/mooocow124/ksnap](https://github.com/mooocow124/ksnap)
 
-### How does it work?
-Detailed in [HACKING.md](./HACKING.md)
+### To-Do List
+
+- [ ] Add basic dependency resolution
+- [ ] Add the ability to update packages
+- [ ] 

@@ -1,15 +1,27 @@
+# Safeguard against running this script from a different directory
+import sys
+
+# Get the directory of the currently running file
+script_dir = __file__.rsplit('/', 1)[0] if '/' in __file__ else '.'
+
+if script_dir not in sys.path:
+    sys.path.insert(0, script_dir)
+
 import sys
 import tomli
 import actions
+from tools import load_state, state_commit
 
 def execute(commands):
     print("Executing transaction!")
+    state = load_state()
     i = 0
     length = len(commands) # amount of commands given
     for command in commands.keys():
         i += 1
         print(f"Executing '{command}', command {i} out of {length}")
-        actions.commands[command](commands[command])
+        state = actions.commands[command](commands[command], state)
+    state_commit(state)
     print("Finished transaction.")
 
 def main(): # parse arguments and return actions and their parameters

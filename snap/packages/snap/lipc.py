@@ -1,4 +1,12 @@
 # Rudimentary MicroPython implementation of the proprietary Lab126 IPC (LIPC) protocol used internally by Kindle.
+# Safeguard against running this script from a different directory
+import sys
+
+# Get the directory of the currently running file
+script_dir = __file__.rsplit('/', 1)[0] if '/' in __file__ else '.'
+
+if script_dir not in sys.path:
+    sys.path.insert(0, script_dir)
 
 import os
 from tools import command_with_output_singleline as run_cmd
