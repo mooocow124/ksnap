@@ -8,6 +8,7 @@ if script_dir not in sys.path:
     sys.path.insert(0, script_dir)
 
 import os
+import random
 from tools import get_snap, resolve_unique_schemas, get_snap_dir, path_join
 
 def rm(pkg, state):
@@ -40,13 +41,10 @@ def add(pkg, state):
     print(f"Adding package {pkg}...")
     # Implementation for adding package
     packages_installed = os.listdir(path_join(get_snap_dir(), "packages"))
-    if pkg in packages_installed:
-        print(f"Package {pkg} is already installed, not adding.")
-        return state
     package_url = resolve_unique_schemas(pkg)
     print(f"Downloading URL {package_url}")
     scratch_path = path_join(get_snap_dir(), "scratch.zip")
-    tempkg = path_join(get_snap_dir(), "packages", "temp")
+    tempkg = path_join(get_snap_dir(), "packages", f"temp_{random.randint(0, 1000000)}")
     package_wget = os.system(f'wget -O "{scratch_path}" "{package_url}"')
     if package_wget != 0:
         print("Aborting, failed to download package.")
@@ -60,6 +58,9 @@ def add(pkg, state):
         return state
     temp_snap = get_snap("temp")
     pkgname = temp_snap["name"]
+    if pkgname in packages_installed:
+        print(f"Package {pkg} is already installed, not adding.")
+        return state
     state["package_required"].append(pkgname)
     return state
 

@@ -4,7 +4,7 @@
 Package manager and framework for modern jailbroken Amazon Kindles
 
 Each argument follows a structure of `action:argument`.
-For example: `ksnap add:gh_releases://mooocow124/example_snap.latest rm:someotherpackage`
+For example: `ksnap add:gh://mooocow124/example_snap.latest rm:someotherpackage`
 
 You can install any .snap.zip file as a package.
 For a list of commands at this time, run `ksnap help:commands`.
