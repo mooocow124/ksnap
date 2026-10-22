@@ -21,4 +21,6 @@ We'd love it if you contribute!
 
 - [ ] Add basic dependency resolution
 - [ ] Add the ability to update packages
-- [ ] 
+- [ ] Overhaul the CLI
+- [ ] Switch to a repo-provides-packages based architecture with Git
+- [ ] Dynamic submodule hydration with the above architecture
