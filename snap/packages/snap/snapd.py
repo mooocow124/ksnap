@@ -1,13 +1,4 @@
 ### COMPLETE THIS LATER
-# Safeguard against running this script from a different directory
-import sys
-
-# Get the directory of the currently running file
-script_dir = __file__.rsplit('/', 1)[0] if '/' in __file__ else '.'
-
-if script_dir not in sys.path:
-    sys.path.insert(0, script_dir)
-
 import os
 import tomli
 from tools import path_join

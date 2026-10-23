@@ -1,12 +1,3 @@
-# Safeguard against running this script from a different directory
-import sys
-
-# Get the directory of the currently running file
-script_dir = __file__.rsplit('/', 1)[0] if '/' in __file__ else '.'
-
-if script_dir not in sys.path:
-    sys.path.insert(0, script_dir)
-
 import os
 import random
 from tools import get_snap, resolve_unique_schemas, get_snap_dir, path_join
@@ -59,8 +50,10 @@ def add(pkg, state):
     temp_snap = get_snap("temp")
     pkgname = temp_snap["name"]
     if pkgname in packages_installed:
-        print(f"Package {pkg} is already installed, not adding.")
-        return state
+        print(f"Package {pkgname} is already installed, adding to required.")
+        os.system(f'rm -rf "{tempkg}"')
+    else:
+        os.rename(tempkg, path_join(get_snap_dir(), "packages", pkgname))
     state["package_required"].append(pkgname)
     return state
 
